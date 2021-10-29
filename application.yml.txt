@@ -1,0 +1,134 @@
+spring:
+    application:
+      name: vstreem 
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: platform@vstreem.com
+      password: March19@2021
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+
+    datasource:
+        url: jdbc:postgresql://localhost:5432/vstreem?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        username: postgres
+        password: admin
+
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    data:
+      mongodb:
+        host: localhost
+        port: 27017
+        database: vstreem
+        authenticationDatabase: admin
+    security:
+      oauth2:
+        client:
+          registration:
+            google:
+              clientId: 968067954570-n6ph37l8ti6ljer59htoiqumqiirpite.apps.googleusercontent.com
+              clientSecret: B-V5ZyhrUoUvCEbnyyVbmMGZ
+              redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - email
+                - profile
+            facebook:
+              clientId: 121189305185277
+              clientSecret: 42ffe5aa7379e8326387e0fe16f34132
+              redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - email
+                - public_profile
+          provider:
+            facebook:
+              authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+              tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+              userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+              
+    thymeleaf:
+      cache: false
+      check-template-location: true
+      prefix: classpath:payment/
+      suffix: .html
+      mode: HTML5
+      encoding: UTF-8
+      servlet:
+        content-type: text/html
+      
+       
+app:
+  scheme: https
+  schemeHost: api-staging.vstreem.com
+  payment:
+    publicKey: pk_test_51Ix8YISGIbrwZ0TC9ULt2Jyd5LuOwYUECcfwnc9IU6cZs0unlSq30jsePps655mpv79L3vfXbXf7UuMZ1HZvqFT200eE4l1PBj
+    secretKey: sk_test_51Ix8YISGIbrwZ0TCjby3wI2uGtBR7cjph2R1NDoSi9AXcwlj6JXv5yWv7HfoKinB488VScBAzTTcKUXyp3ZUMTAb000uX3OM9v
+  mobile:
+    otp:
+      validity: 5
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpirationMsec: 864000000
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:4200/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+  mediaServer: http://mediaserver.vstreem.com:5080
+  
+  twilio:
+    accountId: AC5cf94417642bbffd1b490fdfec3e611d
+    authToken: 68bed9ee5ca0aa9fbd5fae419a7360b0
+    phoneNumber: +13176482183
+    
+  jwt:
+    resetTokenExpirationTime: 3600000
+    verificationMailExpiryTime: 900000
+    secret: arraign
+  
+  resetPasswordBaseUrl: staging.vstreem.com
+  resetPasswordScheme: https
+  registrationLinkBaseUrl: staging.vstreem.com
+
+  google:
+    apiKey: AIzaSyCvsIJkcPpEMO-rlEPy--EJ3d-PfoJUpj8
+  
+  twitch:
+    clientId: gp762nuuoqcoxypju8c569th9wz7q5
+    rtmpEndpoint: rtmp://maa01.contribute.live-video.net/app/
+  
+  cloudAws:
+      accessKey: AKIATZKLYFZME3GGQKDH
+      secretKey: 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
+      region: us-east-2
+  document:
+    s3storageBucketName: vstreem-staging-images
+  mutlipartfileSize: 2
+ 
+is_test_otp: false
+
+aws:
+  region: us-east-2
+
+endpoints:
+  health:
+    sensitive: false
+management:
+  health:
+    db:
+      enabled: true
+    defaults:
+      enabled: true
+    diskspace:
+      enabled: true
+    show-details: always
